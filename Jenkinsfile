@@ -6,12 +6,14 @@ pipeline {
     }
 
     environment {
-        DOCKERHUB_CREDENTIALS = 'dockerhub-creds-id'
-        DOCKERHUB_USERNAME = 'sandeep257
-        IMAGE_NAME = 'tomcat'
-        GIT_REPO = 'https://github.com/dev-sandeep-git/docker-using-tomcat-.git'
-        BRANCH = 'main'
-    }
+    DOCKERHUB_CREDENTIALS = 'dockerhub-creds-id'
+    DOCKERHUB_USERNAME = 'sandeep257'
+    IMAGE_NAME = 'tomcat'
+    GIT_REPO = 'https://github.com/dev-sandeep-git/docker-using-tomcat-.git'
+    BRANCH = 'main'
+    IMAGE_TAG = 'latest'
+}
+
 
     stages {
         stage('Checkout') {
