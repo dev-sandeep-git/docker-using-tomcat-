@@ -103,10 +103,12 @@ pipeline {
         }
 
         stage('Push to Docker Hub') {
-            steps {
-                script {
-                    docker.withRegistry('https://registry.hub.docker.com', "${DOCKERHUB_CREDENTIALS}") {
-                        dockerImage.push('latest')
+           steps {
+        script {
+            echo "Using DockerHub credentials ID: ${DOCKERHUB_CREDENTIALS}"
+            docker.withRegistry('https://registry.hub.docker.com', "${DOCKERHUB_CREDENTIALS}") {
+                dockerImage.push("${IMAGE_TAG}")
+
                     }
                 }
             }
