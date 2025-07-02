@@ -7,8 +7,8 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS = 'dockerhub-creds-id'
-        DOCKERHUB_USERNAME = 'devsandeepdockerhub'
-        IMAGE_NAME = 'tomcat-webapp'
+        DOCKERHUB_USERNAME = 'sandeep257
+        IMAGE_NAME = 'tomcat'
         GIT_REPO = 'https://github.com/dev-sandeep-git/docker-using-tomcat-.git'
         BRANCH = 'main'
     }
@@ -16,7 +16,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: "${BRANCH}", credentialsId: 'github-token', url: "${GIT_REPO}"
+                git branch: 'main', url: 'https://github.com/dev-sandeep-git/docker-using-tomcat-.git'
             }
         }
 
@@ -29,7 +29,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    dockerImage = docker.build("${DOCKERHUB_USERNAME}/${IMAGE_NAME}:latest")
+                    dockerImage = docker.build("$sandeep257/$tomcat:latest")
                 }
             }
         }
@@ -48,9 +48,9 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    docker stop ${IMAGE_NAME} || true
+                    docker stop ${tomcat} || true
                     docker rm ${IMAGE_NAME} || true
-                    docker run -d --name ${IMAGE_NAME} -p 8080:8080 ${DOCKERHUB_USERNAME}/${IMAGE_NAME}:latest
+                    docker run -d --name ${tomcat} -p 8080:8080 ${sandeep257}/$tomcat:latest
                     '''
                 }
             }
