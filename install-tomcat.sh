@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # Set your actual Tomcat path
-TOMCAT_DIR=/opt/apache-tomcat-9.0.85  # or whatever the real version is
+TOMCAT_DIR=/opt/tomcat
+# or whatever the real version is
 WAR_NAME=myapp.war
 
 # Stop Tomcat
