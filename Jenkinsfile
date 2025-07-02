@@ -93,6 +93,11 @@ pipeline {
                 sh 'mvn clean package'
             }
         }
+         stage('Rename WAR to ROOT') {
+            steps {
+                sh 'mv target/*.war target/ROOT.war'
+            }
+        }
 
         stage('Build Docker Image') {
             steps {
