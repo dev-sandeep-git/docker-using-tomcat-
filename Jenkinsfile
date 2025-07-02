@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/your-org/dev-sandeep-git.git'
+              git branch: 'main', url: 'https://github.com/dev-sandeep-git/docker-using-tomcat-.git'
             }
         }
 
