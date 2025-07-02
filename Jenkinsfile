@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: "${BRANCH}", url: "${GIT_REPO}"
+               git branch: 'main', url: 'https://github.com/dev-sandeep-git/docker-using-tomcat-.git'
             }
         }
 
