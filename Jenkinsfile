@@ -4,11 +4,17 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-               git branch: 'main', url: 'https://github.com/dev-sandeep-git/docker-using-tomcat-.git'
+                git 'https://github.com/your-org/dev-sandeep-git.git'
             }
         }
 
-        stage('Build and Deploy Tomcat') {
+        stage('Build WAR') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+
+        stage('Deploy to Tomcat') {
             steps {
                 sh 'chmod +x install-tomcat.sh'
                 sh './install-tomcat.sh'
