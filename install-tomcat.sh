@@ -1,15 +1,22 @@
 #!/bin/bash
-ver=`curl --silent http://mirror.vorboss.net/apache/tomcat/tomcat-9/ | grep v9 | awk '{split($5,c,">v") ; split(c[2],d,"/") ; print d[1]}'`
-sudo yum install -y java wget git
-cd /opt
-rm -rf apache*
-sudo wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.64/bin/apache-tomcat-9.0.64.tar.gz
-sudo tar xvzf apache-tomcat-9.*
-sudo rm -rf apache*.gz
-sudo git clone https://github.com/adhig93/tomcat-config
-sudo cp ./tomcat-config/context.xml /opt/apache-tomcat-9.*/webapps/manager/META-INF/context.xml
-sudo cp ./tomcat-config/context.xml /opt/apache-tomcat-9.*/webapps/host-manager/META-INF/context.xml
-sudo cp ./tomcat-config/tomcat-users.xml /opt/apache-tomcat-9.*/conf/tomcat-users.xml
-sudo rm -rf tomcat-config
-cd /opt/apache-tomcat-9.*
-sudo sh bin/startup.sh
+
+# Set your actual Tomcat path
+TOMCAT_DIR=/opt/apache-tomcat-9.0.85  # or whatever the real version is
+WAR_NAME=myapp.war
+
+# Stop Tomcat
+$TOMCAT_DIR/bin/shutdown.sh
+
+# Wait a few seconds
+sleep 5
+
+# Remove old app
+rm -rf $TOMCAT_DIR/webapps/${WAR_NAME%.*}*
+rm -f $TOMCAT_DIR/webapps/$WAR_NAME
+
+# Copy new WAR file from Jenkins workspace
+cp $WAR_NAME $TOMCAT_DIR/webapps/
+
+# Start Tomcat
+$TOMCAT_DIR/bin/startup.sh
+
